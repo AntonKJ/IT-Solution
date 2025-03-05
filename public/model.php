@@ -100,6 +100,11 @@ function calculate_balances ($user_id, $conn) {
                     SELECT count(id)
                     FROM transactions
                     WHERE account_to = accounts_balances.account_id
+                ),
+                period =  (
+                    SELECT MAX(trdate)
+                    FROM transactions
+                    WHERE account_from = accounts_balances.account_id
                 )
             WHERE accounts_balances.account_id = {$account['id']};
         ");
